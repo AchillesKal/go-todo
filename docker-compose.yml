@@ -1,8 +1,21 @@
-version: "2"
-
+version: '3'
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: gotodo_db
+      POSTGRES_USER: postgres-dev
+      POSTGRES_PASSWORD: s3cr3tp4ssw0rd
+    ports:
+      - 5432:5432
   app:
-    image: golang:1.6.1-alpine
+    build: .
+    command: ["./wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
     volumes:
       - .:/go/src/go_todo
-    working_dir: /go/src/go_todo
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    links:
+      - db

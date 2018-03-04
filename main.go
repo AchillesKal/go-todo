@@ -1,7 +1,18 @@
+// main.go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hello World")
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello from Docker")
+	})
+
+	fmt.Println("Listening on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
