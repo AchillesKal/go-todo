@@ -1,13 +1,15 @@
 package main
 
 import (
-    "fmt"
     "log"
     "net/http"
+		"html/template"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	var data = ""
+	t, _ := template.ParseFiles("templates/index.html")
+	t.Execute(w, data)
 }
 
 func main() {
