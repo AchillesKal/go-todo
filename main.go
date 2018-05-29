@@ -4,9 +4,13 @@ import (
     "log"
     "net/http"
 		"html/template"
+		"fmt"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		fmt.Fprint(w, "POST done")
+	}
 	var data = ""
 	t, _ := template.ParseFiles("templates/index.html")
 	t.Execute(w, data)
