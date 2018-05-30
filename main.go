@@ -49,7 +49,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 		r.ParseForm()
 		x := r.Form.Get("title")
-		x := r.Form.Get("body")
+		y := r.Form.Get("body")
 		fmt.Println(x)
 		fmt.Println(y)
 
