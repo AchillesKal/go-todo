@@ -35,7 +35,7 @@ func main() {
 	database, _ := sql.Open("sqlite3", "./app.db")
 	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
 	statement.Exec()
-	statement, _ = database.Prepare("INSERT INTO people (task, body) VALUES (?, ?)")
+	statement, _ = database.Prepare("INSERT INTO tasks (task, body) VALUES (?, ?)")
 	statement.Exec("Task1", "Lorem ipsum")
 	rows, _ := database.Query("SELECT id, task, body FROM tasks")
 	var id int
