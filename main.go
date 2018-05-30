@@ -24,6 +24,7 @@ func getTasks() {
 	for rows.Next() {
 			rows.Scan(&id, &title, &body)
 			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
+			return title
 	}
 }
 
@@ -35,7 +36,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		var data = ""
+		var data = getTasks()
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(w, data)
 	case "POST":
