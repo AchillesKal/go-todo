@@ -53,6 +53,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(x)
 		fmt.Println(y)
 
+
+		database, _ := sql.Open("sqlite3", "./app.db")
+
+		statement, _ := database.Prepare("INSERT INTO tasks(title, body) values(?,?)")
+		statement.Exec(x, y)
+
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(w, data)
 	default:
