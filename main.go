@@ -11,7 +11,7 @@ import (
 		_ "github.com/mattn/go-sqlite3"
 )
 
-func getTasks() {
+func getTasks() string {
 	database, _ := sql.Open("sqlite3", "./app.db")
 	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
 	statement.Exec()
@@ -24,8 +24,8 @@ func getTasks() {
 	for rows.Next() {
 			rows.Scan(&id, &title, &body)
 			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
-			return title
 	}
+	return title
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
