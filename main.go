@@ -40,7 +40,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(w, data)
 	case "POST":
-		var data = ""
+		var data = getTasks()
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(w, data)
 	default:
