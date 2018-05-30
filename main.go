@@ -46,6 +46,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, data)
 	case "POST":
 		var data = getTasks()
+
+		r.ParseForm()                     // Parses the request body
+    x := r.Form.Get("title") // x will be "" if parameter is not set
+    fmt.Println(x)
+
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(w, data)
 	default:
