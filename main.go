@@ -11,6 +11,11 @@ import (
 		_ "github.com/mattn/go-sqlite3"
 )
 
+type Task struct {
+	Title string
+	Body  error
+}
+
 func getTasks() string {
 	database, _ := sql.Open("sqlite3", "./app.db")
 	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
