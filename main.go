@@ -5,6 +5,8 @@ import (
     "net/http"
 		"html/template"
 		"fmt"
+
+		_ "github.com/mattn/go-sqlite3"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
