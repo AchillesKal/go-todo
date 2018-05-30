@@ -35,15 +35,15 @@ func main() {
 	database, _ := sql.Open("sqlite3", "./app.db")
 	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
 	statement.Exec()
-	statement, _ = database.Prepare("INSERT INTO tasks (task, body) VALUES (?, ?)")
+	statement, _ = database.Prepare("INSERT INTO tasks (title, body) VALUES (?, ?)")
 	statement.Exec("Task1", "Lorem ipsum")
-	rows, _ := database.Query("SELECT id, task, body FROM tasks")
+	rows, _ := database.Query("SELECT id, title, body FROM tasks")
 	var id int
-	var task string
+	var title string
 	var body string
 	for rows.Next() {
-			rows.Scan(&id, &task, &body)
-			fmt.Println(strconv.Itoa(id) + ": " + task + " " + body)
+			rows.Scan(&id, &title, &body)
+			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
 	}
 
 	http.HandleFunc("/", indexHandler)
