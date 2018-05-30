@@ -11,6 +11,22 @@ import (
 		_ "github.com/mattn/go-sqlite3"
 )
 
+func getTasks() {
+	database, _ := sql.Open("sqlite3", "./app.db")
+	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
+	statement.Exec()
+	statement, _ = database.Prepare("INSERT INTO tasks (title, body) VALUES (?, ?)")
+	statement.Exec("Task1", "Lorem ipsum")
+	rows, _ := database.Query("SELECT id, title, body FROM tasks")
+	var id int
+	var title string
+	var body string
+	for rows.Next() {
+			rows.Scan(&id, &title, &body)
+			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
+	}
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 			http.Error(w, "404 not found.", http.StatusNotFound)
@@ -32,20 +48,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database, _ := sql.Open("sqlite3", "./app.db")
-	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
-	statement.Exec()
-	statement, _ = database.Prepare("INSERT INTO tasks (title, body) VALUES (?, ?)")
-	statement.Exec("Task1", "Lorem ipsum")
-	rows, _ := database.Query("SELECT id, title, body FROM tasks")
-	var id int
-	var title string
-	var body string
-	for rows.Next() {
-			rows.Scan(&id, &title, &body)
-			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
-	}
-
 	http.HandleFunc("/", indexHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
