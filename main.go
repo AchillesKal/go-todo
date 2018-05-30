@@ -12,12 +12,19 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
-	if r.Method == "POST" {
-		fmt.Fprint(w, "POST done")
+
+	switch r.Method {
+	case "GET":
+		var data = ""
+		t, _ := template.ParseFiles("templates/index.html")
+		t.Execute(w, data)
+	case "POST":
+		var data = ""
+		t, _ := template.ParseFiles("templates/index.html")
+		t.Execute(w, data)
+	default:
+		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
-	var data = ""
-	t, _ := template.ParseFiles("templates/index.html")
-	t.Execute(w, data)
 }
 
 func main() {
