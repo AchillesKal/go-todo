@@ -8,6 +8,10 @@ import (
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+			http.Error(w, "404 not found.", http.StatusNotFound)
+			return
+	}
 	if r.Method == "POST" {
 		fmt.Fprint(w, "POST done")
 	}
