@@ -39,9 +39,6 @@ type Task struct {
 }
 
 func getTasks() string {
-	database, _ := sql.Open("sqlite3", "./app.db")
-	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
-	statement.Exec()
 	rows, _ := database.Query("SELECT * FROM tasks")
 	var id int
 	var title string
