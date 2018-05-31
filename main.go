@@ -11,6 +11,19 @@ import (
 		_ "github.com/mattn/go-sqlite3"
 )
 
+func initDb(filepath string) *sql.DB {
+	db, err := sql.Open("sqlite3", filepath)
+
+	if err != nil {
+    panic(err)
+	}
+
+	if db == nil {
+		panic("db nil")
+	}
+	return db
+}
+
 type Task struct {
 	Title string
 	Body  error
@@ -36,29 +49,30 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
-	database, _ := sql.Open("sqlite3", "./app.db")
+	db, _ := sql.Open("sqlite3", "./app.db")
+
+	if err != nil {
+			panic(err)
+	}
 
 	var id int
 	var title string
 	var body string
 	var data string
 
-	rows, _ := database.Query("SELECT * FROM tasks")
+	// rows, _ := database.Query("SELECT * FROM tasks")
 
-	for rows.Next() {
+	// for rows.Next() {
 			fmt.Println(id)
 			fmt.Println(title)
 			fmt.Println(body)
-	}
+	// }
 
-	rows.Close() //good habit to close
+	// rows.Close() //good habit to close
 
 	switch r.Method {
 	case "GET":
-		getTasks()
 	case "POST":
-		getTasks()
-
 		r.ParseForm()
 		x := r.Form.Get("title")
 		y := r.Form.Get("body")
