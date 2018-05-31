@@ -24,6 +24,15 @@ func initDb(filepath string) *sql.DB {
 	return db
 }
 
+func migrate(db *sql.DB) {
+  statement, _ := db.Prepare("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, body TEXT)")
+	 _, err :=statement.Exec()
+
+	if err != nil {
+			panic(err)
+	}
+}
+
 type Task struct {
 	Title string
 	Body  error
@@ -90,8 +99,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-  db := initDB("./app.db")
-
+	db := initDB("./app.db")
+	migrate(db)
 
 	http.HandleFunc("/", indexHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
