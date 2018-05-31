@@ -90,6 +90,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+  db := initDB("./app.db")
+
+
 	http.HandleFunc("/", indexHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
