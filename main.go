@@ -32,6 +32,10 @@ func migrate(db *sql.DB) {
 	}
 }
 
+func insertTask(db *sql.DB) {
+
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 			http.Error(w, "404 not found.", http.StatusNotFound)
