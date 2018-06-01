@@ -6,7 +6,6 @@ import (
 		"html/template"
 		"fmt"
 		"database/sql"
-		"strconv"
 
 		_ "github.com/mattn/go-sqlite3"
 )
