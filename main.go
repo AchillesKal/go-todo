@@ -33,7 +33,8 @@ func migrate(db *sql.DB) {
 }
 
 func insertTask(db *sql.DB) {
-
+	statement, _ := db.Prepare("INSERT INTO tasks(title, body) values(?,?)")
+	statement.Exec(x, y)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -49,8 +50,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		x := r.Form.Get("title")
 		y := r.Form.Get("body")
 
-		statement, _ := database.Prepare("INSERT INTO tasks(title, body) values(?,?)")
-		statement.Exec(x, y)
+
 
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
