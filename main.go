@@ -37,11 +37,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
-	db, _ := sql.Open("sqlite3", "./app.db")
-
-	if err != nil {
-			panic(err)
-	}
 
 	switch r.Method {
 	case "GET":
