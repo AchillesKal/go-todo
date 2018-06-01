@@ -61,9 +61,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 	}
 
-	var id int
-	var title string
-
 	switch r.Method {
 	case "GET":
 	case "POST":
