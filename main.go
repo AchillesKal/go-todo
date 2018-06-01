@@ -50,15 +50,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		x := r.Form.Get("title")
 		y := r.Form.Get("body")
 
-
-
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
 
 	t, _ := template.ParseFiles("templates/index.html")
 	t.Execute(w, data)
-
 }
 
 func main() {
