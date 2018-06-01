@@ -63,8 +63,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	var id int
 	var title string
-	var body string
-	var data string
 
 	switch r.Method {
 	case "GET":
