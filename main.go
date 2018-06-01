@@ -66,16 +66,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	var body string
 	var data string
 
-	// rows, _ := database.Query("SELECT * FROM tasks")
-
-	// for rows.Next() {
-			fmt.Println(id)
-			fmt.Println(title)
-			fmt.Println(body)
-	// }
-
-	// rows.Close() //good habit to close
-
 	switch r.Method {
 	case "GET":
 	case "POST":
