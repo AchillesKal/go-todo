@@ -33,23 +33,6 @@ func migrate(db *sql.DB) {
 	}
 }
 
-type Task struct {
-	Title string
-	Body  error
-}
-
-func getTasks() string {
-	rows, _ := database.Query("SELECT * FROM tasks")
-	var id int
-	var title string
-	var body string
-	for rows.Next() {
-			rows.Scan(&id, &title, &body)
-			fmt.Println(strconv.Itoa(id) + ": " + title + " " + body)
-	}
-	return title
-}
-
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 			http.Error(w, "404 not found.", http.StatusNotFound)
