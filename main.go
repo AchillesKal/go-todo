@@ -38,6 +38,10 @@ func insertTask(x, y string) {
 	statement.Exec(x, y)
 }
 
+func getTasks(){
+
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 			http.Error(w, "404 not found.", http.StatusNotFound)
