@@ -10,6 +10,12 @@ import (
 		_ "github.com/mattn/go-sqlite3"
 )
 
+type Task struct {
+	Id	string
+	Title	string
+	Body	string
+}
+
 func initDB(filepath string) *sql.DB {
 	db, err := sql.Open("sqlite3", filepath)
 
