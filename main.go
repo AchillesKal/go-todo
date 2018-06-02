@@ -39,7 +39,9 @@ func insertTask(x, y string) {
 }
 
 func getTasks(){
-
+	db := initDB("./app.db")
+	statement, _ := db.Prepare("SELECT * FROM tasks")
+	statement.Exec()
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
