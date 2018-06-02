@@ -57,9 +57,7 @@ func getTasks() []Task {
 	defer rows.Close()
 
 	for rows.Next() {
-		var helloworld string
-		rows.Scan(&helloworld)
-		fmt.Println(helloworld)
+
 	}
 }
 
