@@ -46,7 +46,13 @@ func insertTask(x, y string) {
 
 func getTasks() []Task {
 	db := initDB("./app.db")
-	statement, _ := db.Prepare("SELECT * FROM tasks")
+
+	rows, err := db.Query("SELECT * FROM tasks")
+
+	if err != nil {
+		panic(err)
+	}
+
 	statement.Exec()
 }
 
