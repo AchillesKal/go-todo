@@ -32,7 +32,7 @@ func migrate(db *sql.DB) {
 	}
 }
 
-func insertTask() {
+func insertTask(x, y string) {
 	db := initDB("./app.db")
 	statement, _ := db.Prepare("INSERT INTO tasks(title, body) values(?,?)")
 	statement.Exec(x, y)
