@@ -46,6 +46,7 @@ func insertTask(x, y string) {
 
 func getTasks() []Task {
 	db := initDB("./app.db")
+	tasks := []Task
 
 	rows, err := db.Query("SELECT * FROM tasks")
 
@@ -55,6 +56,11 @@ func getTasks() []Task {
 
 	defer rows.Close()
 
+	for rows.Next() {
+		var helloworld string
+		rows.Scan(&helloworld)
+		fmt.Println(helloworld)
+	}
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
