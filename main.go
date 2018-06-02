@@ -50,7 +50,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		x := r.Form.Get("title")
 		y := r.Form.Get("body")
-
+		insertTask(x, y)
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
