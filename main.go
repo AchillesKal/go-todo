@@ -55,7 +55,6 @@ func getTasks() []Task {
 
 	defer rows.Close()
 
-	statement.Exec()
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
