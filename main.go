@@ -53,6 +53,8 @@ func getTasks() []Task {
 		panic(err)
 	}
 
+	defer rows.Close()
+
 	statement.Exec()
 }
 
