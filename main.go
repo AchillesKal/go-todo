@@ -44,7 +44,7 @@ func insertTask(x, y string) {
 	statement.Exec(x, y)
 }
 
-func getTasks(){
+func getTasks() []Task {
 	db := initDB("./app.db")
 	statement, _ := db.Prepare("SELECT * FROM tasks")
 	statement.Exec()
