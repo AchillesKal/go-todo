@@ -94,7 +94,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is the delete page")
+	vars := mux.Vars(r)
+  w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Id: %v\n", vars["id"])
 }
 
 func main() {
@@ -102,7 +104,9 @@ func main() {
 	db := initDB("./app.db")
 	migrate(db)
 
-	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/delete", deleteHandler)
+	r.HandleFunc("/", indexHandler)
+	r.HandleFunc("/delete", deleteHandler)
+
+	http.Handle("/", r)
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
