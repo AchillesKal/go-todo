@@ -98,6 +98,7 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	r := mux.NewRouter()
 	db := initDB("./app.db")
 	migrate(db)
 
