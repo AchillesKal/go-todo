@@ -88,7 +88,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteHandler(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Fprintf(w, "This is the delete page")
 }
 
 func main() {
