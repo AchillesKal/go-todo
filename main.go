@@ -87,6 +87,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, Tasks)
 }
 
+func deleteHandler(w http.ResponseWriter, r *http.Request) {
+
+}
+
 func main() {
 	db := initDB("./app.db")
 	migrate(db)
