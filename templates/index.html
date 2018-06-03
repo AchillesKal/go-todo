@@ -57,7 +57,18 @@
 
       function deleteTask(event)
       {
-         console.log(event.target.dataset.id);
+        console.log(event.target.dataset.id);
+        var taskId = event.target.dataset.id;
+
+        return fetch('/delete/'+taskId, {
+          method: 'delete'
+        }).then(response =>
+          response.json().then(json => {
+            console.log(json)
+            return json;
+          })
+        );
+
       }
 
       for (var i = 0; i < deleteButtons.length; i++) {
