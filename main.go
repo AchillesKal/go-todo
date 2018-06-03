@@ -46,7 +46,7 @@ func insertTask(x, y string) {
 
 func getTasks()  {
 	db := initDB("./app.db")
-	 tasks := []Task
+	// tasks := []Task
 
 	rows, err := db.Query("SELECT * FROM tasks")
 
@@ -57,8 +57,10 @@ func getTasks()  {
 	defer rows.Close()
 
 	for rows.Next() {
-		task := Task {Id: 1, Title: "Title1", Body: "This is just a body"}
-			fmt.Println(task);
+		err = rows.Scan(&id, &title, &body)
+
+		task := Task {Id: id, Title: title, Body: body}
+		fmt.Println(task);
 	}
 
 }
