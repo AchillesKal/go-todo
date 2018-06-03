@@ -1,7 +1,8 @@
 package main
 
 import (
-    "log"
+		"log"
+		"strconv"
     "net/http"
 		"html/template"
 		"fmt"
@@ -46,7 +47,7 @@ func insertTask(x, y string) {
 
 func deleteTask(id int) {
 	db := initDB("./app.db")
-	statement, _ := db.Prepare("DELETE FROM tasks WHERE(id) values(?)")
+	statement, _ := db.Prepare("DELETE FROM tasks WHERE id = ?")
 	statement.Exec(id)
 }
 
@@ -95,7 +96,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func deleteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-  w.WriteHeader(http.StatusOK)
+	id, _ := strconv.Atoi(vars["id"])
+	w.WriteHeader(http.StatusOK)
+	deleteTask(id)
 	fmt.Fprintf(w, "Id: %v\n", vars["id"])
 }
 
