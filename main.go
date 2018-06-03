@@ -54,7 +54,11 @@ func getTasks()  {
 		panic(err)
 	}
 
-	defer rows.Close()
+	var (
+		id int
+		title string
+		body string
+	)
 
 	for rows.Next() {
 		err = rows.Scan(&id, &title, &body)
@@ -62,6 +66,8 @@ func getTasks()  {
 		task := Task {Id: id, Title: title, Body: body}
 		fmt.Println(task);
 	}
+
+	defer rows.Close()
 
 }
 
