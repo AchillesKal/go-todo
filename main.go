@@ -7,6 +7,7 @@ import (
 		"html/template"
 		"fmt"
 		"database/sql"
+		"encoding/json"
 		"github.com/gorilla/mux"
 		_ "github.com/mattn/go-sqlite3"
 )
@@ -99,7 +100,9 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(vars["id"])
 	w.WriteHeader(http.StatusOK)
 	deleteTask(id)
-	fmt.Fprintf(w, "Id: %v\n", vars["id"])
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+  json.NewEncoder(w).Encode(id)
 }
 
 func main() {
