@@ -44,6 +44,12 @@ func insertTask(x, y string) {
 	statement.Exec(x, y)
 }
 
+func deleteTask(id int) {
+	db := initDB("./app.db")
+	statement, _ := db.Prepare("DELETE FROM tasks WHERE(id) values(?)")
+	statement.Exec(id)
+}
+
 func getTasks() []Task {
 	db := initDB("./app.db")
 	Tasks := make([]Task, 0, 2)
