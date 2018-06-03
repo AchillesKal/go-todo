@@ -44,10 +44,9 @@ func insertTask(x, y string) {
 	statement.Exec(x, y)
 }
 
-func getTasks()  {
+func getTasks() []Task {
 	db := initDB("./app.db")
-	// tasks := []Task
-
+	Tasks := make([]Task, 0, 2)
 	rows, err := db.Query("SELECT * FROM tasks")
 
 	if err != nil {
@@ -62,13 +61,10 @@ func getTasks()  {
 
 	for rows.Next() {
 		err = rows.Scan(&id, &title, &body)
-
-		task := Task {Id: id, Title: title, Body: body}
-		fmt.Println(task);
+		Tasks = append(Tasks, Task {Id: id, Title: title, Body: body})
 	}
 
-	defer rows.Close()
-
+	return Tasks
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -76,6 +72,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
+
+
+	Tasks := getTasks()
+	fmt.Println(Tasks);
 
 	switch r.Method {
 	case "GET":
@@ -87,16 +87,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
-  data := "tests"
 	t, _ := template.ParseFiles("templates/index.html")
-	t.Execute(w, data)
+	t.Execute(w, Tasks)
 }
 
 func main() {
 	db := initDB("./app.db")
 	migrate(db)
-
-	getTasks()
 
 	http.HandleFunc("/", indexHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
