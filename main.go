@@ -72,8 +72,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
-	Tasks := getTasks()
-
 	switch r.Method {
 	case "GET":
 	case "POST":
@@ -85,6 +83,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
 	t, _ := template.ParseFiles("templates/index.html")
+	Tasks := getTasks()
 	t.Execute(w, Tasks)
 }
 
