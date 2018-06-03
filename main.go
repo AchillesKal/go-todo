@@ -72,10 +72,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "404 not found.", http.StatusNotFound)
 			return
 	}
-
-
 	Tasks := getTasks()
-	fmt.Println(Tasks);
 
 	switch r.Method {
 	case "GET":

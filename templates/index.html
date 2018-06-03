@@ -24,7 +24,24 @@
       </form>
     </div>
     <div>
-    {{.Tasks}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .}}
+          <tr>
+            <th scope="row">{{.Id}}</th>
+            <td>{{.Title}}</td>
+            <td>{{.Body}}</td>
+          </tr>
+         {{end}}
+      </tbody>
+    </table>
     </div>
 
     <!-- Optional JavaScript -->
