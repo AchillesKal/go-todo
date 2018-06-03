@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           {{range .}}
-            <tr>
+            <tr data-task-id="{{.Id}}">
               <th scope="row">{{.Id}}</th>
               <td>{{.Title}}</td>
               <td>{{.Body}}</td>
