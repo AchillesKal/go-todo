@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           {{range .}}
-            <tr data-task-id="{{.Id}}">
+            <tr id="task-{{.Id}}">
               <th scope="row">{{.Id}}</th>
               <td>{{.Title}}</td>
               <td>{{.Body}}</td>
@@ -64,7 +64,8 @@
           method: 'delete'
         }).then(response =>
           response.json().then(json => {
-            console.log(json)
+            var row = document.getElementById("task-"+json);
+            row.remove();
             return json;
           })
         );
