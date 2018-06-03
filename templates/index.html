@@ -9,7 +9,7 @@
     <title>Go todo app | AchillesKal</title>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <h1>Go Todo App</h1>
       <form method="POST">
         <div class="form-group">
@@ -22,28 +22,31 @@
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
-    </div>
-    <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Body</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{range .}}
+      <div>
+      <table class="table">
+        <thead>
           <tr>
-            <th scope="row">{{.Id}}</th>
-            <td>{{.Title}}</td>
-            <td>{{.Body}}</td>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col">Actions</th>
           </tr>
-         {{end}}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {{range .}}
+            <tr>
+              <th scope="row">{{.Id}}</th>
+              <td>{{.Title}}</td>
+              <td>{{.Body}}</td>
+              <td>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          {{end}}
+        </tbody>
+      </table>
+      </div>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
