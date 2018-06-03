@@ -11,7 +11,7 @@ import (
 )
 
 type Task struct {
-	Id	string
+	Id	int
 	Title	string
 	Body	string
 }
@@ -44,9 +44,9 @@ func insertTask(x, y string) {
 	statement.Exec(x, y)
 }
 
-func getTasks() []Task {
+func getTasks()  {
 	db := initDB("./app.db")
-	tasks := []Task
+	 tasks := []Task
 
 	rows, err := db.Query("SELECT * FROM tasks")
 
@@ -57,8 +57,10 @@ func getTasks() []Task {
 	defer rows.Close()
 
 	for rows.Next() {
-
+		task := Task {Id: 1, Title: "Title1", Body: "This is just a body"}
+			fmt.Println(task);
 	}
+
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -77,7 +79,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
 	}
-
+  data := "tests"
 	t, _ := template.ParseFiles("templates/index.html")
 	t.Execute(w, data)
 }
@@ -85,6 +87,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	db := initDB("./app.db")
 	migrate(db)
+
+	getTasks()
 
 	http.HandleFunc("/", indexHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
