@@ -92,5 +92,6 @@ func main() {
 	migrate(db)
 
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/delete", deleteHandler)
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
